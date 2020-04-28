@@ -1,0 +1,168 @@
+$heading-height: 75px;
+
+#editor-column {
+  .locked {
+    opacity: 0.8;
+  }
+}
+
+.section.editor {
+  flex: 1 50%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  background-color: var(--sn-stylekit-editor-background-color);
+  color: var(--sn-stylekit-editor-foreground-color);
+}
+
+#editor-title-bar {
+  width: 100%;
+
+  padding-top: 14px;
+  padding-left: 14px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+
+  border-bottom: none;
+  z-index: $z-index-editor-title-bar;
+
+  height: auto;
+  overflow: visible;
+
+  $title-width: 70%;
+  $save-status-width: 30%;
+
+  > .title {
+    font-size: var(--sn-stylekit-font-size-h1);
+    font-weight: bold;
+    padding-top: 0px;
+    width: $title-width;
+    padding-right: 20px; /* make room for save status */
+
+    > .input {
+      float: left;
+      text-overflow:ellipsis;
+      width: 100%;
+      font-weight: bold;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: var(--sn-stylekit-editor-foreground-color);
+
+      &:disabled {
+        color: var(--sn-stylekit-editor-foreground-color);
+      }
+    }
+
+  }
+
+  #save-status {
+    width: $save-status-width;
+    float: right;
+    position: absolute;
+
+    right: 20px;
+    font-size: calc(var(--sn-stylekit-base-font-size) - 2px);
+    text-transform: none;
+    font-weight: normal;
+    margin-top: 4px;
+    text-align: right;
+    white-space: nowrap;
+
+    .desc, .message:not(.warning):not(.danger) {
+      // color: var(--sn-stylekit-editor-foreground-color);
+      opacity: 0.35;
+    }
+  }
+
+  .editor-tags {
+    clear: left;
+    width: 100%;
+    overflow: visible;
+    position: relative;
+
+    #note-tags-component-container {
+      height: 50px;
+      overflow: auto; // Required for expired sub to not overflow
+
+      .component-view {
+        // see comment under main .component-view css defintion
+        position: inherit;
+      }
+
+      iframe {
+        height: 50px;
+        width: 100%;
+        position: absolute; // Required for autocomplete window to show
+      }
+    }
+
+
+    .tags-input {
+      background-color: transparent;
+      color: var(--sn-stylekit-foreground-color);
+      width: 100%;
+      border: none;
+    }
+  }
+}
+
+.editor-content, #editor-content {
+  flex: 1;
+  z-index: $z-index-editor-content;
+  overflow-y: hidden;
+  height: 100%;
+  display: flex;
+  tab-size: 2;
+  background-color: var(--sn-stylekit-background-color);
+
+  position: relative;
+
+  #editor-iframe {
+    flex: 1;
+    width: 100%;
+  }
+
+  .editable {
+    font-family: monospace;
+    overflow-y: scroll;
+    width: 100%;
+    background-color: var(--sn-stylekit-editor-background-color);
+    color: var(--sn-stylekit-editor-foreground-color);
+
+    border: none;
+    outline: none;
+    padding: 15px;
+    padding-top: 11px;
+    font-size: var(--sn-stylekit-font-size-editor);
+    resize: none;
+  }
+}
+
+#editor-pane-component-stack {
+  width: 100%;
+  // To keep glued to bottom when editor is in loading state and not visible.
+  margin-top: auto;
+
+  // When two component stack items are expired and eat up full screen, this is required to scroll them.
+  // overflow: auto;
+  // When expired components, without this, requires scroll
+  overflow: visible;
+
+  #component-stack-menu-bar {
+    border-bottom: none;
+  }
+
+  .component-stack-item {
+    width: 100%;
+    position: relative;
+
+    iframe {
+      width: 100%;
+      background-color: var(--sn-stylekit-background-color);
+      // we moved the border top from the .component-stack-item to the .iframe, as on parent,
+      // it increases its height and caused unneccessary scrollbars on windows.
+      border-top: 1px solid var(--sn-stylekit-border-color);
+    }
+  }
+}

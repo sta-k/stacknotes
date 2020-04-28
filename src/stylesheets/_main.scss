@@ -1,0 +1,222 @@
+$z-index-editor-content: 10;
+
+$z-index-editor-title-bar: 100;
+$z-index-dropdown-menu: 100;
+
+$z-index-resizer-overlay: 1000;
+$z-index-panel-resizer: 1001;
+
+$z-index-component-view: 1000;
+
+$z-index-footer-bar: 2000;
+$z-index-footer-bar-item: 2000;
+$z-index-footer-bar-item-panel: 2000;
+
+$z-index-lock-screen: 10000;
+$z-index-modal: 10000;
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  height: 100%;
+  font-size: var(--sn-stylekit-base-font-size);
+  margin: 0;
+  color: var(--sn-stylekit-foreground-color);
+  background-color: var(--sn-stylekit-background-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.tinted {
+  color: var(--sn-stylekit-info-color);
+}
+
+.tinted-selected {
+  color: var(--sn-stylekit-info-contrast-color);
+}
+
+*:focus {outline:0;}
+
+button:focus {
+  outline:0;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  text-decoration: none;
+
+  &.no-decoration {
+    color: inherit;
+  }
+
+  &:hover {
+    text-decoration: underline;
+
+    &.no-decoration {
+      text-decoration: none;
+    }
+  }
+}
+
+::selection {
+  background: var(--sn-stylekit-info-color) !important; /* WebKit/Blink Browsers */
+  color: var(--sn-stylekit-info-contrast-color);
+}
+
+::-moz-selection {
+  background: var(--sn-stylekit-info-color) !important;
+  color: var(--sn-stylekit-info-contrast-color);
+}
+
+p {
+  overflow: auto;
+}
+
+.main-ui-view {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+  background-color: var(--sn-stylekit-background-color);
+}
+
+$footer-height: 32px;
+
+#resizer-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: $z-index-resizer-overlay;
+  opacity: 0;
+}
+
+.app {
+  height: calc(100% - #{$footer-height});
+  width: 100%;
+  display: flex;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+
+  panel-resizer {
+    top: 0;
+    right: 0;
+    z-index: $z-index-panel-resizer;
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    cursor: col-resize;
+    // needs to be a color that works on main bg and contrast bg
+    background-color: var(--sn-stylekit-secondary-contrast-background-color);
+    opacity: 0;
+    border-top: none;
+    border-bottom: none;
+
+    @keyframes fade {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    &.left {
+      left: 0;
+      right: none;
+    }
+
+    &.always-visible {
+      opacity: 1;
+    }
+
+    &.collapsed {
+      opacity: 1;
+      // so it blends in with editor a bit more
+      background-color: var(--sn-stylekit-editor-background-color);
+    }
+
+    &.dragging {
+      opacity: 1;
+    }
+
+    &.animate-opacity {
+      animation-duration: 1.6s;
+      animation-name: fade;
+      animation-delay: 0.25s;
+    }
+
+    &.hoverable {
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .section {
+    padding-bottom: 0px;
+    height: 100%;
+    max-height: calc(100vh - #{$footer-height});
+    position: relative;
+    overflow: hidden;
+
+    .scrollable {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    > .content {
+      height: 100%;
+      max-height: 100%;
+      background-color: var(--sn-stylekit-background-color);
+      position: relative;
+    }
+
+    .section-title-bar {
+
+     .padded {
+       padding: 0 14px;
+     }
+
+     .add-button {
+       font-size: 12px;
+     }
+
+     .section-title-bar-header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       // This was causing problems with tags + button cutting off on right when the panel is a certain size
+       // overflow: hidden;
+
+       > .title {
+         white-space: nowrap;
+         text-overflow: ellipsis;
+         width: 80%;
+         overflow: hidden;
+       }
+     }
+   }
+  }
+}
+
+.icon {
+  margin-right: 4px;
+}

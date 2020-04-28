@@ -1,0 +1,27 @@
+.sn-component
+  #item-preview-modal.sk-modal.medium
+    .sk-modal-background
+    .sk-modal-content
+      .sn-component
+        .sk-panel
+          .sk-panel-header
+            .sk-panel-header-title Preview
+            .sk-horizontal-group
+              a.sk-a.info.close-button(
+                ng-click="ctrl.restore(false)"
+                ) Restore
+              a.sk-a.info.close-button(
+                ng-click="ctrl.restore(true)"
+                ) Restore as copy
+              a.sk-a.info.close-button(
+                ng-click="ctrl.dismiss(); $event.stopPropagation()"
+                ) Close
+          .sk-panel-content.selectable(ng-if="!ctrl.editor")
+            .sk-h2 {{ctrl.content.title}}
+            p.normal.sk-p(
+              style="white-space: pre-wrap; font-size: 16px;"
+              ) {{ctrl.content.text}}
+          component-view.component-view(
+            component="ctrl.editor" 
+            ng-if="ctrl.editor"
+            )

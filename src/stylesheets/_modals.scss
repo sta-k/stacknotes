@@ -1,0 +1,206 @@
+#permissions-modal {
+  width: 350px;
+  .sk-panel {
+    border-radius: 0;
+  }
+  .sk-panel-content {
+    padding-top: 1.1rem;
+  }
+  .sk-panel-footer {
+    padding-bottom: 1.4rem;
+  }
+}
+
+#privileges-modal {
+  width: 700px;
+
+  table {
+    margin-bottom: 12px;
+    width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border-color: var(--sn-stylekit-contrast-border-color);
+    background-color: var(--sn-stylekit-background-color);
+    color: var(--sn-stylekit-contrast-foreground-color);
+
+    th, td {
+      padding: 6px 13px;
+      border: 1px solid var(--sn-stylekit-contrast-border-color);
+    }
+
+    tr:nth-child(2n) {
+      background-color: var(--sn-stylekit-contrast-background-color);
+    }
+  }
+
+  th {
+    text-align: center;
+    font-weight: normal;
+  }
+
+  .priv-header  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#password-wizard {
+  font-size: 16px;
+}
+
+#item-preview-modal {
+  > .sk-modal-content {
+    width: 800px;
+    height: 500px;
+  }
+}
+
+#conflict-resolution-modal {
+  #items {
+    display: flex;
+    height: 100%;
+  }
+
+  .item {
+    width: 50%;
+    height: 100%;
+    flex-grow: 1;
+  }
+
+  .border {
+    height: 100%;
+    background-color: var(--sn-stylekit-border-color);
+    width: 1px;
+    margin: 0 15px;
+  }
+}
+
+.header .subtitle {
+  font-size: 1.1rem;
+}
+
+.sk-modal {
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: $z-index-modal;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: transparent;
+  color: var(--sn-stylekit-contrast-foreground-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sn-component {
+    height: 100%;
+    .sk-panel {
+      height: 100%;
+    }
+  }
+
+  &.auto-height {
+    > .sk-modal-content {
+      height: auto !important;
+    }
+  }
+
+  &.large {
+    > .sk-modal-content {
+      width: 900px;
+      height: 600px;
+    }
+  }
+
+  &.medium {
+    > .sk-modal-content {
+      width: 700px;
+      height: 500px;
+    }
+  }
+
+  &.small {
+    > .sk-modal-content {
+      width: 700px;
+      height: 344px;
+    }
+  }
+
+  .sk-modal-background {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--sn-stylekit-contrast-background-color);
+    opacity: 0.7;
+  }
+
+  > .sk-modal-content {
+    overflow-y: auto;
+    width: auto;
+    padding: 0;
+    padding-bottom: 0;
+    min-width: 300px;
+
+    -webkit-box-shadow: 0px 2px 35px 0px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 2px 35px 0px rgba(0,0,0,0.19);
+    box-shadow: 0px 2px 35px 0px rgba(0,0,0,0.19);
+  }
+}
+
+// Optionally use if .component-view container is not flex-based
+.component-view-container {
+  flex-grow: 1;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.component-view {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  // required so that .loading-overlay absolute works properly wrt to modal components. However, seems to break #note-tags-component-container.
+  // I couldn't find any solution to this other than to customize .component-view position back to inherit for note-tags-component-container.
+  position: relative;
+
+  // not sure why we need this. Removed because it creates unncessary scroll bars. Tested on folders extension, creates horizontal scrollbar at bottom on windows
+  // overflow: auto;
+  // Update: we needed that because when we display the expired Extended view, it allows it to scroll vertically.
+  overflow-y: auto;
+
+  .sn-component {
+    min-width: 100%;
+    z-index: $z-index-component-view;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    background-color: var(--sn-stylekit-editor-background-color);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  iframe {
+    // We're disabling flex: 1; because on Firefox, it causes weird sizing issues with component stack items.
+    // Not sure yet if totally required.
+    // Update: The extensions manager doesn't display correctly without it
+    // flex-grow: 1 should fix that.
+
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+  }
+}

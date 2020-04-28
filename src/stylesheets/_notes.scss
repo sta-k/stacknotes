@@ -1,0 +1,245 @@
+#notes-column,
+.notes {
+  border-left: 1px solid var(--sn-stylekit-border-color);
+  border-right: 1px solid var(--sn-stylekit-border-color);
+
+  font-size: var(--sn-stylekit-font-size-h2);
+
+  width: 350px;
+  flex-grow: 0;
+  user-select: none;
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #notes-title-bar {
+    padding-top: 16px;
+    font-weight: normal;
+    font-size: var(--sn-stylekit-font-size-h1);
+
+    .section-title-bar-header .title {
+      font-size: var(--sn-stylekit-font-size-h3);
+      font-weight: 600;
+      width: calc(90% - 45px);
+    }
+  }
+
+  #notes-menu-bar {
+    position: relative;
+    margin-top: 14px;
+  }
+
+  #notes-options-menu {
+    margin-left: 10px;
+  }
+
+  .filter-section {
+    clear: left;
+    height: 28px;
+    margin-top: 14px;
+    position: relative;
+
+    .filter-bar {
+      background-color: var(--sn-stylekit-contrast-background-color);
+      border-radius: var(--sn-stylekit-general-border-radius);
+      height: 100%;
+      color: #909090;
+      text-align: center;
+      font-weight: normal;
+      font-size: var(--sn-stylekit-font-size-h3);
+
+      border: none;
+      width: 100%;
+      position: relative;
+    }
+
+    #search-clear-button {
+      border-radius: 50%;
+      width: 17px;
+      height: 17px;
+      cursor: default;
+      background-color: var(--sn-stylekit-neutral-color);
+      color: var(--sn-stylekit-neutral-contrast-color);
+      font-size: 10px;
+      line-height: 17px;
+      text-align: center;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+
+      transition: background-color 0.15s linear;
+
+      &:hover {
+        background-color: var(--sn-stylekit-info-color);
+      }
+    }
+  }
+
+  .scrollable {
+    height: 100%;
+  }
+
+  .infinite-scroll {
+    overflow-x: hidden;
+    height: inherit;
+
+    // Autohide scrollbar on Windows.
+    @at-root {
+      .windows-web &,
+      .windows-desktop & {
+        overflow-y: hidden;
+        &:hover {
+          overflow-y: auto;
+          overflow-y: overlay; // overlay is not supported on ff, so keep previous statement up
+        }
+      }
+    }
+  }
+
+  .note {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid var(--sn-stylekit-border-color);
+    cursor: pointer;
+
+    > .name {
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    > .date {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .tags-string {
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .note-preview {
+      font-size: var(--sn-stylekit-font-size-h3);
+      margin-top: 2px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .default-preview,
+      .plain-preview {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        $line-height: 18px;
+        line-height: $line-height; /* fallback */
+        max-height: calc(#{$line-height} * 1); /* fallback */
+      }
+
+      .html-preview {
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+    }
+
+    .note-flag {
+      color: var(--sn-stylekit-info-color);
+    }
+
+    .note-flags {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 8px;
+
+      .flag {
+        padding: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+        border-radius: var(--sn-stylekit-general-border-radius);
+        margin-right: 4px;
+
+        &.info {
+          background-color: var(--sn-stylekit-info-color);
+          color: var(--sn-stylekit-info-contrast-color);
+        }
+
+        &.success {
+          background-color: var(--sn-stylekit-success-color);
+          color: var(--sn-stylekit-success-contrast-color);
+        }
+
+        &.warning {
+          background-color: var(--sn-stylekit-warning-color);
+          color: var(--sn-stylekit-warning-contrast-color);
+        }
+
+        &.neutral {
+          background-color: var(--sn-stylekit-neutral-color);
+          color: var(--sn-stylekit-neutral-contrast-color);
+        }
+
+        &.danger {
+          background-color: var(--sn-stylekit-danger-color);
+          color: var(--sn-stylekit-danger-contrast-color);
+        }
+
+        .label {
+          font-size: 10px;
+          font-weight: bold;
+          text-align: center;
+        }
+      }
+    }
+
+    progress {
+      background-color: var(--sn-stylekit-contrast-background-color);
+      color: var(--sn-stylekit-info-color);
+      border: none;
+
+      &::-webkit-progress-bar {
+        background-color: var(--sn-stylekit-contrast-background-color);
+      }
+
+      &::-webkit-progress-value {
+        background-color: var(--sn-stylekit-info-color);
+      }
+
+      &::-moz-progress-bar {
+        background-color: var(--sn-stylekit-info-color);
+      }
+    }
+
+    &.selected {
+      background-color: var(--sn-stylekit-info-color);
+      color: var(--sn-stylekit-info-contrast-color);
+
+      .note-flags .flag {
+        background-color: var(--sn-stylekit-info-contrast-color);
+        color: var(--sn-stylekit-info-color);
+      }
+
+      progress {
+        background-color: var(--sn-stylekit-secondary-foreground-color);
+        color: var(--sn-stylekit-secondary-background-color);
+
+        &::-webkit-progress-bar {
+          background-color: var(--sn-stylekit-secondary-foreground-color);
+        }
+
+        &::-webkit-progress-value {
+          background-color: var(--sn-stylekit-secondary-background-color);
+        }
+
+        &::-moz-progress-bar {
+          background-color: var(--sn-stylekit-secondary-background-color);
+        }
+      }
+    }
+  }
+}
