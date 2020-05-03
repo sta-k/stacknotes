@@ -7,10 +7,10 @@ module.exports = {
   entry: './src/javascripts/index.js',
   output: {
     filename: 'app.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
   },
   devServer: {
-     contentBase: './dist',
+     contentBase: './docs',
   },
   plugins: [
     new webpack.DefinePlugin({
