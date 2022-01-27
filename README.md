@@ -10,8 +10,9 @@ This repo contains the core code used in the [web app](https://github.com/standa
 **Instructions:**
 
 1. Clone the repo
-2. `npm install`
-3. `npm start`
+2. `nvm use v13.14.0`
+3. `npm install`
+4. `npm start`
 
 **build the app**
 
