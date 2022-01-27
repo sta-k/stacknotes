@@ -17,7 +17,10 @@ This repo contains the core code used in the [web app](https://github.com/standa
 **build the app**
 
 `npm run build`
+`cd docs`
+`python3 -m http.server 8080`
 
+after build switch to latest npm: `nvm use node`
 
 Then open your browser to <http://localhost:8080>.
 
