@@ -16,7 +16,7 @@ This repo contains the core code used in the [web app](https://github.com/standa
 
 **build the app**
 
-`npm run build`
+`npm run build` # before build you need to nvm to use old node version
 `cd docs`
 `python3 -m http.server 8080`
 
